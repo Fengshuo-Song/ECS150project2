@@ -4,6 +4,17 @@
 
 #include <queue.h>
 
+#define TEST_ASSERT(assert)				\
+do {									\
+	printf("ASSERT: " #assert " ... ");	\
+	if (assert) {						\
+		printf("PASS\n");				\
+	} else	{							\
+		printf("FAIL\n");				\
+		exit(1);						\
+	}									\
+} while(0)
+
 /* Create */
 void test_create(void)
 {
