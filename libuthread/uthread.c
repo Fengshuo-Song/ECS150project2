@@ -133,26 +133,26 @@ int uthread_stop(void)
 
 int uthread_create(uthread_func_t func)
 {
-	if(cur_tid == USHRT_MAX)
+	if (cur_tid == USHRT_MAX)
 		return -1;
 	
 	//Create the new thread and initialize it.
 	struct thread *new_thread = (struct thread*)malloc(sizeof(struct thread));
-	if(!new_thread)
+	if (!new_thread)
 		return -1;
 	new_thread->tid = ++ cur_tid;
 	new_thread->state = 0;
 	new_thread->stack = uthread_ctx_alloc_stack();
 	new_thread->return_value = 0;
 	new_thread->join_tid = -1;		
-	if(uthread_ctx_init(&new_thread->context, new_thread->stack, func) == -1)
+	if (uthread_ctx_init(&new_thread->context, new_thread->stack, func) == -1)
 	{
 		cur_tid --;
 		return -1;
 	}
 	
 	//Put the new thread into the ready_queue.
-	if(queue_enqueue(ready_queue, new_thread) == -1)
+	if (queue_enqueue(ready_queue, new_thread) == -1)
 		return -1;
 
 	return new_thread->tid;
@@ -164,12 +164,12 @@ void uthread_yield(void)
 	cur_thread->state = 0;
 	queue_enqueue(ready_queue, cur_thread);
 	
-	//Current thread becomes the first (oldest) item in the ready_queue.
+	//The first (oldest) item in the ready_queue becomes current thread.
 	struct thread *next_tcb;
 	queue_dequeue(ready_queue, (void**)&next_tcb);
 	struct thread *prev_tcb = cur_thread;
 	cur_thread = next_tcb;
-    cur_thread->state = 1;
+	cur_thread->state = 1;
 	
 	if (has_preempt)
 		preempt_disable();
@@ -187,9 +187,9 @@ void uthread_exit(int retval)
 	cur_thread->state = 3;
 	cur_thread->return_value = retval;
     
-    //If blocked_queue is empty, no thread is waiting. Then just put it into the finish queue.
+	//If blocked_queue is empty, no thread is waiting. Then just put it into the finish queue.
 	int blocked_queue_length = queue_length(blocked_queue);
-	if(blocked_queue_length > 0)
+	if (blocked_queue_length > 0)
 		queue_iterate(blocked_queue, unblock_thread, (void*)(&(cur_thread->tid)), NULL);
 
 	queue_enqueue(finish_queue, cur_thread);
@@ -218,12 +218,12 @@ int uthread_join(uthread_t tid, int *retval)
 	
 	//If the thread is finished, then collect its return value;
 	//Otherwise, add it to the blocked_queue.
-	if(find_pointer)
+	if (find_pointer)
 	{
 		cur_thread->retval = retval;
 
-        if(retval != NULL)
-            *retval = find_pointer->return_value;
+        if (retval != NULL)
+			*retval = find_pointer->return_value;
 		cur_thread->state = 0;
 		
 		//Update join_tid, since it does not need to wait.
@@ -248,7 +248,7 @@ int uthread_join(uthread_t tid, int *retval)
 	
 	//Search the thread in the ready_queue. If not found, then there is an error.
 	find_pointer = find_item(ready_queue, tid);
-	if(find_pointer)
+	if (find_pointer)
 	{
 		cur_thread->join_tid = (int) find_pointer->tid;
 		cur_thread->retval = retval;

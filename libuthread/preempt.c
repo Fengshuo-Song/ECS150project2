@@ -19,9 +19,14 @@ struct sigaction sa, original_sa;
 struct itimerval new_time, original_time;
 sigset_t sset;
 
-void handler()
+void handler(int sig)
 {
-    uthread_yield();
+    switch(sig)
+    {
+        case SIGVTALRM:
+            uthread_yield();
+            break;
+    }
 }
 
 void preempt_start(void)
@@ -41,7 +46,6 @@ void preempt_start(void)
 	new_time.it_value.tv_usec = 10000;
 	new_time.it_value.tv_sec = 0;
 	setitimer(ITIMER_VIRTUAL, &new_time, &original_time);
-	
 }
 
 void preempt_stop(void)
@@ -52,11 +56,11 @@ void preempt_stop(void)
 
 void preempt_enable(void)
 {
-	sigprocmask(SIG_BLOCK, &sset, NULL);
+	sigprocmask(SIG_UNBLOCK, &sset, NULL);
 }
 
 void preempt_disable(void)
 {
-	sigprocmask(SIG_UNBLOCK, &sset, NULL);
+	sigprocmask(SIG_BLOCK, &sset, NULL);
 }
 

@@ -87,7 +87,7 @@ int queue_dequeue(queue_t queue, void **data)
 
 	//Delete the node.
 	queue->front->next = queue->front->next->next;
-    if (queue->rear == pt_node) 
+	if (queue->rear == pt_node) 
 		queue->rear = queue->front;
 	queue->length --;
 	free(pt_node);
