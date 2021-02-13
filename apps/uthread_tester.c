@@ -84,14 +84,14 @@ void test_return1(void)
 	printf("==Actual Output:\n");
 	
 	uthread_t tid;
-    int ret_A = 100;
+	int ret_A = 100;
     
 	uthread_start(0);
-    uthread_yield();
+	uthread_yield();
 	tid = uthread_create(thread_A);
-    uthread_yield();
-    printf("Main thread joins A.\n");
-    uthread_join(tid, &ret_A);
+	uthread_yield();
+	printf("Main thread joins A.\n");
+	uthread_join(tid, &ret_A);
 	uthread_stop();
 	printf("Thread A returns %d.\n",ret_A);
 
@@ -111,14 +111,14 @@ void test_return2(void)
 	printf("==Actual Output:\n");
 	
 	uthread_t tid;
-    int ret_A = 100;
+	int ret_A = 100;
     
 	uthread_start(0);
-    uthread_yield();
+	uthread_yield();
 	tid = uthread_create(thread_A);
 	printf("Main thread joins A.\n");
-    uthread_join(tid, &ret_A);
-    uthread_yield();
+	uthread_join(tid, &ret_A);
+	uthread_yield();
 	uthread_stop();
 	printf("Thread A returns %d.\n",ret_A);
 
@@ -135,20 +135,20 @@ int helloA(void)
 
 int helloB(void)
 {
-    printf("B1: Hello world!\n");
-    uthread_yield();
+	printf("B1: Hello world!\n");
+	uthread_yield();
 	printf("B2: Hello world!\n");
-    uthread_yield();
+	uthread_yield();
 	return 2;
 }
 
 int helloC(void)
 {
-    printf("C1: Hello world!\n");
-    uthread_yield();
+	printf("C1: Hello world!\n");
+	uthread_yield();
 	printf("C2: Hello world!\n");
-    uthread_yield();
-    uthread_exit(666);
+	uthread_yield();
+	uthread_exit(666);
 	return 3;
 }
 
@@ -163,21 +163,21 @@ void test_return_complex(void)
 	printf("==Actual Output:\n");
 	
 	uthread_t tidA;
-    uthread_t tidC;
-
-    int ret_A = 100;
-    int ret_C = 200;
+	uthread_t tidC;
+	
+	int ret_A = 100;
+	int ret_C = 200;
 	uthread_start(0);
-    uthread_yield();
+	uthread_yield();
 	tidA = uthread_create(helloA);
-    uthread_yield();
+	uthread_yield();
 	uthread_create(helloB);
 	tidC = uthread_create(helloC);
-
-    uthread_join(tidA, &ret_A);
-    uthread_yield();
+	
+	uthread_join(tidA, &ret_A);
+	uthread_yield();
 	uthread_join(tidC, &ret_C);
-
+	
 	uthread_stop();
 	
 	printf("Thread helloA returns %d.\n",ret_A);
