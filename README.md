@@ -22,7 +22,7 @@ gives a unique thread ID, which can be used later to manage the thread.
 3.	Manage the execution, return value and termination of the threads. In\
 this step, users can control the scheduling of different threads, get the\
 current thread ID and obtain a particular value returned by a thread.
-4.	End the program by calling uthread_start() function. This frees the\
+4.	End the program by calling uthread_stop() function. This frees the\
 memory space created in previous steps and restore the previous environment\
 variables(signal action and timer configuration).(Part 2 and Part 3 can be\
 repeated in different orders.)
