@@ -16,7 +16,7 @@ The implementation of this program can be divided into 4 parts.
 1.	Start the program by calling uthread_start() function. The user can\
 configure whether to use the preemption. If the parameter of the function\
 is 0, then the program does not use preemption; otherwise, preemption will\
-be used.\
+be used.
 2.	Create new threads by calling uthread_create() function. This function\
 gives a unique thread ID, which can be used later to manage the thread.
 3.	Manage the execution, return value and termination of the threads. In\
