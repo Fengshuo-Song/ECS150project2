@@ -47,7 +47,7 @@ time, which is not good when there are some very important and urgent thread.
 
 ## Testing
 We have created testing files for queue, uthread and preempt. In the queue\
-tester, we use unit testing, which implement several testing functions that\
+tester, we use unit testing, which implements several testing functions that\
 will trigger some part of our programs. In the uthread tester, we also create\
 multiple testing functions. However, since some values in the thread cannot be\
 collected by the main thread easily, it is difficult to do unit testing in the\
