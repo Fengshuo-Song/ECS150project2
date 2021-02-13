@@ -73,8 +73,6 @@ by itself.
 
 [*Queue*](https://www.geeksforgeeks.org/queue-data-structure/)
 
-[*Signal Action*](https://www.gnu.org/software/libc/manual/html_mono/libc.html
-#Signal-Actions)
+[*Signal Action*](https://www.gnu.org/software/libc/manual/html_mono/libc.html#Signal-Actions)
 
-[*Alarm*](https://www.gnu.org/software/libc/manual/html_mono/libc.html
-#Setting-an-Alarm)
+[*Alarm*](https://www.gnu.org/software/libc/manual/html_mono/libc.html#Setting-an-Alarm)
