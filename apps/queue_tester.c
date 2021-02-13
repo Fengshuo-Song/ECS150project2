@@ -48,6 +48,11 @@ void test_queue_complex(void)
 	fprintf(stderr, "*** TEST queue_complex ***\n");
 
 	q = queue_create();
+	
+	//Enqueue a NULL item
+	int *nul = NULL;
+	TEST_ASSERT(queue_enqueue(q, nul) == -1);
+
 	for (i = 0; i < 5; i++)
 		queue_enqueue(q, &data[i]);
 
